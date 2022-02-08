@@ -1,0 +1,9 @@
+---
+- name: use my new collection
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: show me the word of the day
+      ansible.builtin.debug:
+        msg: "{{ ansible_user }}"
