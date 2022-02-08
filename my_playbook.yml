@@ -1,0 +1,11 @@
+---
+- name: use my new collection
+  hosts: localhost
+  connection: local
+
+  tasks:
+    - name: show me the word of the day
+      vars:
+        myr_word: playbook
+      include_role:
+        name: zjpeterson.my_collection.my_role
