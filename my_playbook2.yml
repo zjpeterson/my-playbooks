@@ -8,6 +8,8 @@
       - inmem1
       - inmem2
       - inmem3
+      - inmem4
+      - inmem5
 
   tasks:
     - name: add hosts
