@@ -1,9 +1,26 @@
 ---
-- name: use my new collection
+- name: use in-memory inventory
   hosts: localhost
   connection: local
 
+  vars:
+    add_these_hosts:
+      - inmem1
+      - inmem2
+      - inmem3
+
   tasks:
-    - name: show me the word of the day
+    - name: add hosts
+      ansible.builtin.add_host:
+        name: "{{ item }}"
+        group: dynamic
+      loop: "{{ add_these_hosts }}"
+
+- name: do something with the new hosts
+  hosts: dynamic
+  connection: local
+
+  tasks:
+    - name: say hi
       ansible.builtin.debug:
-        msg: "{{ ansible_user }}"
+        msg: hello from {{ inventory_hostname }}
