@@ -2,6 +2,7 @@
 - name: use in-memory inventory
   hosts: localhost
   connection: local
+  gather_facts: no
 
   vars:
     add_these_hosts:
@@ -16,13 +17,15 @@
       ansible.builtin.add_host:
         name: "{{ item }}"
         group: dynamic
+        ansible_host: "{{ test_ip }}"
       loop: "{{ add_these_hosts }}"
 
 - name: do something with the new hosts
   hosts: dynamic
-  connection: local
+  gather_facts: no
 
   tasks:
     - name: say hi
-      ansible.builtin.debug:
-        msg: hello from {{ inventory_hostname }}
+      ansible.builtin.copy:
+        content: hello this is {{ inventory_hostname }}
+        dest: /tmp/hello
